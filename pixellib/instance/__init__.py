@@ -430,7 +430,7 @@ class instance_segmentation():
 
 
 
-    def segmentFrame(self, frame, show_bboxes = False,  segment_target_classes = None, extract_segmented_objects = False,
+    def segmentFrame(self, frame, counter, show_bboxes = False,  segment_target_classes = None, extract_segmented_objects = False,
     text_thickness = 0,text_size = 0.6, box_thickness = 2, save_extracted_objects = False,mask_points_values = False,  
     output_image_name = None, verbose = None):
 
@@ -504,7 +504,7 @@ class instance_segmentation():
                     extracted_objects = img[np.ix_(mask[:,:,a].any(1), mask[:,:,a].any(0))]
                     ex.append(extracted_objects)
                     if save_extracted_objects == True:
-                        save_path = os.path.join("segmented_object" + "_" + str(m) + ".jpg")
+                        save_path = os.path.join("segmented_object" + "_" + str(counter) + ".jpg")
                         cv2.imwrite(save_path, extracted_objects)
 
                 extracted_objects = np.array(ex, dtype = object)
@@ -566,7 +566,7 @@ class instance_segmentation():
             if ret:
                 
                     
-                seg, output =  self.segmentFrame(frame, show_bboxes=show_bboxes, segment_target_classes=segment_target_classes,
+                seg, output =  self.segmentFrame(frame, counter, show_bboxes=show_bboxes, segment_target_classes=segment_target_classes,
                         text_thickness = text_thickness,text_size = text_size, box_thickness = box_thickness,
                         extract_segmented_objects=extract_segmented_objects, save_extracted_objects=save_extracted_objects,
                         mask_points_values= mask_points_values )
